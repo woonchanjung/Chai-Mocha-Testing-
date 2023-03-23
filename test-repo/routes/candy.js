@@ -16,4 +16,16 @@ router.post('/', (req, res) => {
   res.status(201).json(req.body)
 });
 
+// DELETE /candies/:id
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+  const index = candies.findIndex(candy => candy.id == id);
+  if (index !== -1) {
+  candies.splice(index, 1);
+  res.status(204).json({ message: 'Candy deleted successfully.' });
+  } else {
+  res.status(404).json({ message: `Candy with ID ${id} not found.` });
+  }
+});
+
 module.exports = router;
